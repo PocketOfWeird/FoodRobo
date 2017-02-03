@@ -3,17 +3,5 @@ import settings from '../../config/settings'
 
 
 const firebase = Firebase.initializeApp(settings)
+firebase.auth().signInAnonymously()
 export default firebase
-
-
-const googleAuth = new Firebase.auth.GoogleAuthProvider()
-
-export const loginWithGoogle = () => {
-  firebase.auth().signInWithPopup(googleAuth)
-}
-
-export const logoutUser = () => {
-  firebase.auth().signOut()
-}
-
-firebase.auth().getRedirectResult().catch(err => console.log(err))
