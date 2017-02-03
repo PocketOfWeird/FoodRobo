@@ -1,18 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { connect } from 'react-redux'
+import { StyleSheet, Text, View } from 'react-native'
+import LoginScene from './LoginScene'
+import { isLoggedIn } from '../selectors'
+
 
 const RootScene = (props) => (
   <View style={styles.container}>
-    <Text style={styles.welcome}>
-      Welcome to React Native!
-    </Text>
-    <Text style={styles.instructions}>
-      To get started, edit index.ios.js
-    </Text>
-    <Text style={styles.instructions}>
-      Press Cmd+R to reload,{'\n'}
-      Cmd+D or shake for dev menu
-    </Text>
+    {!props.loggedIn &&
+      <LoginScene />
+    }
+    {props.loggedIn &&
+      <View>
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, edit index.ios.js
+        </Text>
+        <Text style={styles.instructions}>
+          Press Cmd+R to reload,{'\n'}
+          Cmd+D or shake for dev menu
+        </Text>
+      </View>
+    }
   </View>
 )
 
@@ -35,4 +46,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default RootScene
+const mapStateToProps = state => ({
+  loggedIn: isLoggedIn(state)
+})
+
+export default connect(
+  mapStateToProps
+)(RootScene)

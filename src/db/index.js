@@ -9,7 +9,7 @@ export default firebase
 const googleAuth = new Firebase.auth.GoogleAuthProvider()
 
 export const loginWithGoogle = () => {
-  firebase.auth().signInWithRedirect(googleAuth)
+  firebase.auth().signInWithPopup(googleAuth)
 }
 
 export const logoutUser = () => {
